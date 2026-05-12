@@ -1,0 +1,21 @@
+{
+  "name": "Mano Pizza",
+  "short_name": "Mano Pizza",
+  "description": "Pizza al taglio da asporto a Bra.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#fff8ef",
+  "theme_color": "#e00012",
+  "lang": "it",
+  "categories": ["food", "business"],
+  "icons": [
+    {
+      "src": "assets/mano-logo.jpg",
+      "sizes": "150x150",
+      "type": "image/jpeg",
+      "purpose": "any maskable"
+    }
+  ]
+}
