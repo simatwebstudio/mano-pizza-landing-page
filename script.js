@@ -23,6 +23,12 @@ function toMinutes(time) {
   return hours * 60 + minutes;
 }
 
+function formatClock(minutes) {
+  const hours = String(Math.floor(minutes / 60)).padStart(2, "0");
+  const mins = String(minutes % 60).padStart(2, "0");
+  return `${hours}:${mins}`;
+}
+
 function getRomeTime(date = new Date()) {
   const formatter = new Intl.DateTimeFormat("en-US", {
     timeZone: ROME_TIMEZONE,
@@ -61,6 +67,7 @@ function getNextOpening(currentDay, currentMinutes) {
 function buildStatus() {
   const { day, minutes } = getRomeTime();
   const today = OPENING_SCHEDULE.find((entry) => entry.day === day);
+  const time = formatClock(minutes);
 
   if (today) {
     const open = toMinutes(today.open);
@@ -70,7 +77,8 @@ function buildStatus() {
       return {
         open: true,
         label: "Aperto ora",
-        detail: `Oggi fino alle ${today.close}.`
+        detail: `Oggi fino alle ${today.close}.`,
+        time
       };
     }
   }
@@ -81,14 +89,23 @@ function buildStatus() {
   return {
     open: false,
     label: "Chiuso ora",
-    detail: `Riapre ${nextText}.`
+    detail: `Riapre ${nextText}.`,
+    time
   };
 }
 
 function updateOpenStatus() {
   const status = buildStatus();
+  const cards = document.querySelectorAll("[data-status-card]");
   const badges = document.querySelectorAll("[data-open-status]");
   const details = document.querySelectorAll("[data-status-detail]");
+  const times = document.querySelectorAll("[data-status-time]");
+
+  cards.forEach((card) => {
+    card.classList.toggle("is-open", status.open);
+    card.classList.toggle("is-closed", !status.open);
+    card.setAttribute("aria-label", `${status.label}. ${status.detail}`);
+  });
 
   badges.forEach((badge) => {
     badge.textContent = status.label;
@@ -98,6 +115,10 @@ function updateOpenStatus() {
 
   details.forEach((detail) => {
     detail.textContent = status.detail;
+  });
+
+  times.forEach((time) => {
+    time.textContent = status.time;
   });
 }
 

@@ -101,7 +101,6 @@
       <div class="hero__ticker" aria-label="Informazioni rapide">
         <span>Piazza XX Settembre 9</span>
         <span>Tranci legali e criminali</span>
-        <span data-open-status>Controllo orario...</span>
       </div>
     </section>
 
@@ -203,8 +202,15 @@
         <div class="section-heading reveal">
           <p class="eyebrow">Orari</p>
           <h2 id="hours-title">Aperto a pranzo lungo, chiuso nel weekend.</h2>
-          <p class="status-pill" data-open-status>Controllo orario...</p>
-          <p class="status-detail" data-status-detail>Verifica automatica sull'orario di Bra.</p>
+          <a class="hero-status hours-status" href="tel:+393881856684" data-status-card aria-live="polite">
+            <span class="hero-status__pulse" aria-hidden="true"></span>
+            <span class="hero-status__copy">
+              <span class="hero-status__kicker">Ora da Mano</span>
+              <strong data-open-status>Controllo orario...</strong>
+              <span data-status-detail>Verifica automatica sull'orario di Bra.</span>
+            </span>
+            <span class="hero-status__time" data-status-time>--:--</span>
+          </a>
         </div>
         <div class="hours-table reveal" aria-label="Orari di apertura">
           <div><span>Lunedì</span><strong>12:00-19:30</strong></div>
