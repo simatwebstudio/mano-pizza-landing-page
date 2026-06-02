@@ -189,10 +189,58 @@ function initReveal() {
   elements.forEach((element) => observer.observe(element));
 }
 
+function initLegalLanguage() {
+  const buttons = document.querySelectorAll("[data-lang-button]");
+  const panels = Array.from(document.querySelectorAll("[data-lang-panel]")).filter((panel) => !panel.closest(".site-header"));
+
+  if (!buttons.length || !panels.length) {
+    return;
+  }
+
+  const getHashLanguage = () => (window.location.hash === "#privacy-en" ? "en" : "it");
+
+  const setLanguage = (language, updateHash = false) => {
+    const activeLanguage = language === "en" ? "en" : "it";
+
+    document.documentElement.lang = activeLanguage;
+    document.body.dataset.legalLang = activeLanguage;
+
+    panels.forEach((panel) => {
+      panel.hidden = panel.dataset.langPanel !== activeLanguage;
+    });
+
+    buttons.forEach((button) => {
+      const isActive = button.dataset.langButton === activeLanguage;
+      button.classList.toggle("is-active", isActive);
+      button.setAttribute("aria-pressed", String(isActive));
+    });
+
+    if (updateHash) {
+      const nextHash = `#privacy-${activeLanguage}`;
+      if (window.location.hash !== nextHash) {
+        history.replaceState(null, "", `${window.location.pathname}${window.location.search}${nextHash}`);
+      }
+    }
+  };
+
+  buttons.forEach((button) => {
+    button.addEventListener("click", () => {
+      setLanguage(button.dataset.langButton, true);
+    });
+  });
+
+  window.addEventListener("hashchange", () => {
+    setLanguage(getHashLanguage());
+  });
+
+  setLanguage(getHashLanguage());
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   initNavigation();
   initHeaderState();
   initReveal();
+  initLegalLanguage();
   updateOpenStatus();
   window.setInterval(updateOpenStatus, 60000);
 });
