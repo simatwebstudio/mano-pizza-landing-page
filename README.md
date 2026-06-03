@@ -9,11 +9,10 @@ Sito statico one-page per Mano Pizza, pizzeria al taglio da asporto a Bra.
 - `styles.css`: stile responsive senza dipendenze esterne obbligatorie.
 - `script.js`: menu mobile, stato header, animazioni leggere e stato aperto/chiuso.
 - `404.html`: pagina errore coerente con il sito.
-- `manifest.json`, `robots.txt`, `sitemap.xml`: supporto base per PWA, crawler e SEO.
-- `_headers`: riferimento per hosting statici che supportano il formato. GitHub Pages non applica direttamente questo file.
+- `manifest.json`, `robots.txt`, `sitemap.xml`, `CNAME`: supporto base per PWA, crawler, SEO e dominio custom su GitHub Pages.
+- `_headers.example`: riferimento per hosting statici che supportano header custom. GitHub Pages non applica questo file.
 - `assets/`: logo e foto reali del locale/prodotto, con asset WebP rinominati con estensione corretta.
 - `assets/fonts/`: cartella predisposta per font self-hosted.
-- `lineeGuida/FONT_DA_SCARICARE_E_SELF_HOSTARE.md`: istruzioni operative per scaricare Anton e verificarlo localmente.
 
 ## Orari configurati
 
@@ -31,7 +30,7 @@ https://manopizza.it
 
 ## Privacy e servizi esterni
 
-Il sito e' impostato per restare cookie-free: non usa form, analytics, pixel, iframe, storage di tracciamento o script esterni. Instagram e Google Maps sono semplici link esterni attivati solo dopo click dell'utente.
+Il sito e' impostato per restare cookie-free: non usa form, analytics, pixel, iframe, storage persistente nel browser o script esterni. Instagram e Google Maps sono semplici link esterni attivati solo dopo click dell'utente.
 
 Per la pubblicazione sono indicati in privacy policy:
 
@@ -57,13 +56,4 @@ Percorso locale:
 assets/fonts/Anton-Regular.woff2
 ```
 
-Fonte: Google Fonts / repository `google/fonts`, licenza SIL Open Font License 1.1. Dettagli in `lineeGuida/FONT_DA_SCARICARE_E_SELF_HOSTARE.md`.
-
-## Dati legali configurati
-
-- Ragione sociale: TEOSINTE S.N.C. DI GHIUZAN BIANCA OTILIA & C.
-- P.IVA e Codice Fiscale: 04058570047
-- VAT UE: IT04058570047
-- REA: CN 333125
-- Sede legale: Via Mendicita' Istruita 7, 12042 Bra (CN)
-- PEC: teosinte.snc@pec.it
+Fonte: Google Fonts / repository `google/fonts`, licenza SIL Open Font License 1.1.

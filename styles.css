@@ -1513,6 +1513,10 @@ body.is-nav-open .nav-menu {
     width: 100%;
   }
 
+  .location-photo__button {
+    width: auto;
+  }
+
   .legal-tools__inner {
     align-items: stretch;
   }
