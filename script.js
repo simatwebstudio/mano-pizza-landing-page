@@ -1,5 +1,4 @@
 const ROME_TIMEZONE = "Europe/Rome";
-const INSTAGRAM_POPUP_STORAGE_KEY = "manoPizzaInstagramPopupClosed";
 const INSTAGRAM_POPUP_DELAY = 1500;
 
 const OPENING_SCHEDULE = [
@@ -250,24 +249,9 @@ function initInstagramPopup() {
   const closeButtons = popup.querySelectorAll("[data-instagram-popup-close]");
   const cta = popup.querySelector("[data-instagram-popup-cta]");
   let previouslyFocused = null;
+  let popupClosed = false;
 
-  const hasClosedPopup = () => {
-    try {
-      return window.localStorage.getItem(INSTAGRAM_POPUP_STORAGE_KEY) !== null;
-    } catch (error) {
-      return false;
-    }
-  };
-
-  const rememberClosedPopup = () => {
-    try {
-      window.localStorage.setItem(INSTAGRAM_POPUP_STORAGE_KEY, "true");
-    } catch (error) {
-      // localStorage can be unavailable in private or restricted contexts.
-    }
-  };
-
-  if (!dialog || hasClosedPopup()) {
+  if (!dialog) {
     return;
   }
 
@@ -284,7 +268,7 @@ function initInstagramPopup() {
   };
 
   const closePopup = () => {
-    rememberClosedPopup();
+    popupClosed = true;
     popup.classList.remove("is-active");
     popup.hidden = true;
     document.removeEventListener("keydown", handleKeydown);
@@ -328,6 +312,10 @@ function initInstagramPopup() {
   }
 
   const openPopup = () => {
+    if (popupClosed) {
+      return;
+    }
+
     previouslyFocused = document.activeElement instanceof HTMLElement ? document.activeElement : null;
     popup.hidden = false;
 
