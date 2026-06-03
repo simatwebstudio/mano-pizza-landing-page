@@ -1,4 +1,6 @@
 const ROME_TIMEZONE = "Europe/Rome";
+const INSTAGRAM_POPUP_STORAGE_KEY = "manoPizzaInstagramPopupClosed";
+const INSTAGRAM_POPUP_DELAY = 1500;
 
 const OPENING_SCHEDULE = [
   { day: 1, label: "Lunedì", open: "12:00", close: "19:30" },
@@ -236,11 +238,129 @@ function initLegalLanguage() {
   setLanguage(getHashLanguage());
 }
 
+function initInstagramPopup() {
+  const popup = document.querySelector("[data-instagram-popup]");
+
+  if (!popup) {
+    return;
+  }
+
+  const dialog = popup.querySelector(".instagram-popup__dialog");
+  const overlay = popup.querySelector("[data-instagram-popup-overlay]");
+  const closeButtons = popup.querySelectorAll("[data-instagram-popup-close]");
+  const cta = popup.querySelector("[data-instagram-popup-cta]");
+  let previouslyFocused = null;
+
+  const hasClosedPopup = () => {
+    try {
+      return window.localStorage.getItem(INSTAGRAM_POPUP_STORAGE_KEY) !== null;
+    } catch (error) {
+      return false;
+    }
+  };
+
+  const rememberClosedPopup = () => {
+    try {
+      window.localStorage.setItem(INSTAGRAM_POPUP_STORAGE_KEY, "true");
+    } catch (error) {
+      // localStorage can be unavailable in private or restricted contexts.
+    }
+  };
+
+  if (!dialog || hasClosedPopup()) {
+    return;
+  }
+
+  const getFocusableElements = () => Array.from(
+    dialog.querySelectorAll(
+      'a[href], button:not([disabled]), textarea:not([disabled]), input:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])'
+    )
+  ).filter((element) => element.offsetParent !== null);
+
+  const restoreFocus = () => {
+    if (previouslyFocused && typeof previouslyFocused.focus === "function") {
+      previouslyFocused.focus({ preventScroll: true });
+    }
+  };
+
+  const closePopup = () => {
+    rememberClosedPopup();
+    popup.classList.remove("is-active");
+    popup.hidden = true;
+    document.removeEventListener("keydown", handleKeydown);
+    restoreFocus();
+  };
+
+  function handleKeydown(event) {
+    if (event.key === "Escape") {
+      event.preventDefault();
+      closePopup();
+      return;
+    }
+
+    if (event.key !== "Tab") {
+      return;
+    }
+
+    const focusableElements = getFocusableElements();
+
+    if (!focusableElements.length) {
+      event.preventDefault();
+      dialog.focus({ preventScroll: true });
+      return;
+    }
+
+    const firstElement = focusableElements[0];
+    const lastElement = focusableElements[focusableElements.length - 1];
+    const currentIndex = focusableElements.indexOf(document.activeElement);
+
+    event.preventDefault();
+
+    if (currentIndex === -1) {
+      (event.shiftKey ? lastElement : firstElement).focus();
+    } else if (event.shiftKey && document.activeElement === firstElement) {
+      lastElement.focus();
+    } else if (!event.shiftKey && document.activeElement === lastElement) {
+      firstElement.focus();
+    } else {
+      focusableElements[currentIndex + (event.shiftKey ? -1 : 1)].focus();
+    }
+  }
+
+  const openPopup = () => {
+    previouslyFocused = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+    popup.hidden = false;
+
+    window.requestAnimationFrame(() => {
+      popup.classList.add("is-active");
+    });
+
+    document.addEventListener("keydown", handleKeydown);
+    const closeButton = closeButtons[0];
+    (closeButton || dialog).focus({ preventScroll: true });
+  };
+
+  closeButtons.forEach((button) => {
+    button.addEventListener("click", closePopup);
+  });
+
+  if (overlay) {
+    overlay.addEventListener("click", closePopup);
+  }
+
+  if (cta) {
+    cta.addEventListener("click", closePopup);
+  }
+
+  window.setTimeout(openPopup, INSTAGRAM_POPUP_DELAY);
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   initNavigation();
   initHeaderState();
   initReveal();
   initLegalLanguage();
+  initInstagramPopup();
   updateOpenStatus();
   window.setInterval(updateOpenStatus, 60000);
 });

@@ -24,7 +24,7 @@
   <link rel="apple-touch-icon" href="assets/mano-logo.jpg" />
   <link rel="manifest" href="manifest.json" />
   <link rel="preload" as="image" href="assets/mano-storefront.webp" />
-  <link rel="stylesheet" href="styles.css?v=20260602-1930" />
+  <link rel="stylesheet" href="styles.css?v=20260603-2200" />
 
   <script type="application/ld+json">
   {
@@ -60,6 +60,37 @@
 </head>
 <body>
   <a class="skip-link" href="#main">Salta al contenuto</a>
+
+  <div class="instagram-popup" data-instagram-popup hidden>
+    <div class="instagram-popup__backdrop" data-instagram-popup-overlay></div>
+    <div
+      class="instagram-popup__dialog"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="instagram-popup-title"
+      aria-describedby="instagram-popup-description"
+      tabindex="-1"
+    >
+      <button class="instagram-popup__close" type="button" aria-label="Chiudi popup" data-instagram-popup-close>
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <div class="instagram-popup__art" aria-hidden="true">
+        <img src="assets/pizza-del-giorno.png" width="400" height="400" alt="" />
+      </div>
+      <div class="instagram-popup__content">
+        <h2 class="instagram-popup__title" id="instagram-popup-title">PIZZA DEL GIORNO?</h2>
+        <p class="instagram-popup__description" id="instagram-popup-description">Scopri il gusto del giorno e le novit&agrave; appena sfornate.</p>
+        <a class="instagram-popup__cta" href="https://www.instagram.com/manopizza.bra" target="_blank" rel="noopener noreferrer" data-instagram-popup-cta>
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <rect x="3" y="3" width="18" height="18" rx="5"></rect>
+            <circle cx="12" cy="12" r="4"></circle>
+            <circle cx="17.5" cy="6.5" r="1.2"></circle>
+          </svg>
+          <span>GUARDA SU INSTAGRAM</span>
+        </a>
+      </div>
+    </div>
+  </div>
 
   <header class="site-header" data-site-header>
     <nav class="nav" aria-label="Navigazione principale">
@@ -239,14 +270,11 @@
       <div class="container location__grid">
         <div class="location__copy reveal">
           <p class="eyebrow">Dove siamo</p>
-          <h2 id="location-title">In Piazza XX Settembre, a Bra.</h2>
-          <address>
-            Mano Pizza<br />
-            P.za XX Settembre, 9<br />
-            12042 Bra CN
+          <address class="location__address" id="location-title">
+            <span>P.za XX Settembre, 9</span>
+            <span>12042 Bra CN</span>
           </address>
           <div class="contact-actions">
-            <a class="button button--red" href="tel:+393881856684">388 185 6684</a>
             <a class="button button--ink" href="https://www.instagram.com/manopizza.bra" target="_blank" rel="noopener noreferrer">@manopizza.bra</a>
           </div>
         </div>
@@ -288,11 +316,11 @@
       </div>
     </div>
     <div class="container footer-bottom">
-      <p>(c) 2026 Mano Pizza Criminale. Tutti i diritti riservati</p>
+      <p>(c) 2026 TEOSINTE S.N.C. DI GHIUZAN BIANCA OTILIA &amp; C.. Tutti i diritti riservati</p>
       <a href="privacy.html">Privacy policy</a>
     </div>
   </footer>
 
-  <script src="script.js?v=20260512-2210"></script>
+  <script src="script.js?v=20260603-2215"></script>
 </body>
 </html>
