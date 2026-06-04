@@ -1331,6 +1331,10 @@ body.is-nav-open .nav-menu {
   color: rgba(255, 255, 255, 0.88);
 }
 
+.footer-credit {
+  text-align: right;
+}
+
 .reveal {
   opacity: 0;
   transform: translateY(18px);
