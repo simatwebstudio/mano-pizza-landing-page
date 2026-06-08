@@ -2,11 +2,11 @@ const ROME_TIMEZONE = "Europe/Rome";
 const INSTAGRAM_POPUP_DELAY = 1500;
 
 const OPENING_SCHEDULE = [
-  { day: 1, label: "Lunedì", open: "12:00", close: "19:30" },
-  { day: 2, label: "Martedì", open: "12:00", close: "19:30" },
-  { day: 3, label: "Mercoledì", open: "12:00", close: "19:30" },
-  { day: 4, label: "Giovedì", open: "12:00", close: "19:30" },
-  { day: 5, label: "Venerdì", open: "12:00", close: "19:30" }
+  { day: 2, label: "Martedì", open: "17:00", close: "23:00" },
+  { day: 3, label: "Mercoledì", open: "17:00", close: "23:00" },
+  { day: 4, label: "Giovedì", open: "17:00", close: "23:00" },
+  { day: 5, label: "Venerdì", open: "17:00", close: "23:00" },
+  { day: 6, label: "Sabato", open: "17:00", close: "23:00" }
 ];
 
 const WEEKDAY_MAP = {

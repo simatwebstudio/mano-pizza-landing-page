@@ -16,7 +16,7 @@ Sito statico one-page per Mano Pizza, pizzeria al taglio da asporto a Bra.
 
 ## Orari configurati
 
-Lunedì-venerdì 12:00-19:30. Sabato e domenica chiuso. Lo stato aperto/chiuso viene calcolato nel browser usando il fuso orario `Europe/Rome`.
+Martedì-sabato 17:00-23:00. Domenica e lunedì chiuso. Lo stato aperto/chiuso viene calcolato nel browser usando il fuso orario `Europe/Rome`.
 
 ## Pubblicazione
 
